@@ -1,0 +1,4 @@
+---
+evqueue:
+  mysql:
+    user: root

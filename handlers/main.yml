@@ -1,0 +1,6 @@
+- name: restart evqueue
+  service: name=evqueue state=restarted
+- name: restart apache
+  service: name=apache2 state=restarted
+- name: restart php-fpm
+  service: name=php5-fpm state=restarted

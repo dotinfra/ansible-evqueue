@@ -1,0 +1,15 @@
+ServerName {{ ansible_fqdn }}
+<VirtualHost *:80>
+        DocumentRoot /var/www/html/
+        <Directory /var/www/html>
+                Order allow,deny
+                Allow from all
+                AllowOverRide All
+    		Options FollowSymLinks
+        </Directory>
+        CustomLog ${APACHE_LOG_DIR}/evqueue-access_log combined
+        ErrorLog ${APACHE_LOG_DIR}/evqueue-error_log
+        ProxyPassMatch ^/(.*\.php(/.*)?)$ unix:/var/run/php5-fpm.sock|fcgi://127.0.0.1:9000/var/www/html/
+        DirectoryIndex index.php
+
+</VirtualHost>

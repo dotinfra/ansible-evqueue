@@ -2,7 +2,7 @@
 - apt: pkg=python-mysqldb state=latest
 - stat: path=/etc/apt/sources.list.d/dotinfra_evqueue.list
   register: evqueuerepo
-- get_url: validate_certs=no url=https://packagecloud.io/install/repositories/dotinfra/evqueue/script.deb.sh dest=/tmp/packagecloud_install.sh
+- get_url: validate_certs=no url=https://packagecloud.io/install/repositories/evqueue/core/script.deb.sh dest=/tmp/packagecloud_install.sh
   when: not evqueuerepo.stat.exists
 - command: /bin/bash /tmp/packagecloud_install.sh
   when: not evqueuerepo.stat.exists
@@ -10,7 +10,6 @@
 
 - apt: pkg=mysql-server state=latest
 - mysql_db: name=evqueue state=present
-- get_url: validate_certs=no url=https://packagecloud.io/install/repositories/dotinfra/evqueue/script.deb.sh dest=/tmp/packagecloud_install.sh
 - copy: src=create_tables.sql dest=/tmp
 - mysql_db: name=evqueue state=import target=/tmp/create_tables.sql
 
